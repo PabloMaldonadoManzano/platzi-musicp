@@ -16,16 +16,21 @@
       <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
+    <login></login>
   </div>
 </template>
 
 <script>
+import Login from './components/login.vue'
 export default {
   name: 'app',
   data () {
     return {
       msg: 'Hola vue!'
     }
+  },
+  components:{
+  Login: Login
   }
 }
 </script>
