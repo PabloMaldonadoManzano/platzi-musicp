@@ -12,6 +12,7 @@
   "dependencies": {
     "acorn": "^6.1.0",
     "bulma": "^0.7.4",
+    "trae": "^1.4.2",
     "vue": "^2.5.11"
   },
   "browserslist": [

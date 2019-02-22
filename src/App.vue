@@ -29,26 +29,72 @@
     <p v-else>{{"Es false"}}</p>
     <ul>
       <li v-for="i in items" v-bind:key="i">{{i}}</li>
-    </ul-->
+    </ul>
     <br>
     <input v-model="name"/>
     <input v-model="lastname"/>
-    <!--a v-bind:href="url">Link</a-->
+    <a v-bind:href="url">Link</a>
     <br>
     <p>{{name}}</p>
     <p>{{lastname}}</p>
     <p>{{fullName}}</p>
-    <!--login></login-->
+    <p>{{edad}}</p>
+
+    <button v-on:click="format">Dar formato</button>
+    <p>{{formattedName}}</p>
+
+    <login></login-->
+    <section class="section">
+      <nav class="nav has-shadow">
+        <div class="container">
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <input class="input is-large" type="text" placeholder="Buscar canciones" v-model="searchQuery"/>
+            </div>
+            <div class="control">
+              <a class="button is-info is-large" @click="search">Buscar</a>
+              <a class="button is-danger is-large">&times;</a>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <p>
+            <small>{{searchMessage}}</small>
+          </p>
+        </div>
+      </nav>
+      <child>
+
+      </child>
+      <div class="container results">
+        <div class="columns">
+          <div class="column" v-for=" t in tracks">
+            {{t.name}}-{{t.artists[0].name}}
+          </div>
+        </div>
+      </div>
+
+
+    </section>
+
   </div>
 </template>
 
 <script>
-//import Login from './components/login.vue'
+    import trackService from './services/track.js'
+
+  /*const tracks = [
+      {name: 'Dance macabre', artist: 'Ghost'},
+      {name: 'Dont go breacking my heart', artist:'Elton john'},
+      {name: 'Stranger', artist: 'the rasmus'}
+      ];
+import Login from './components/login.vue'*/
+
 export default {
   name: 'app',
   data () {
     return {
-      msg: 'Hola vue!',
+     /* msg: 'Hola vue!',
       name: '',
       lastname: '',
       person: {
@@ -57,17 +103,55 @@ export default {
         showValue: false,
         value: 'Algo',
         items: [1,2,3,4,5],
-        url: 'https://platzi.com'
-
+        url: 'https://platzi.com',
+        fechaNacimiento: '29/04/1994',
+        formattedName: ''
+      */
+     searchQuery: '',
+     tracks: []
     }
   },
   components:{
 
   },
-  computed:{
-      fullName () {
-          return `${this.name} ${this.lastname}`
+  methods:{
+      /*format(){
+        this.formattedName = this.name.split(' ').join('-').toUpperCase()
+      }*/
+      search () {
+          if (this.searchQuery === ''){return}
+          var that = this
+          console.log(this.tracks)
+          trackService.search(this.searchQuery)
+              .then(function(res){
+                  return  that.tracks = res.tracks.items
+              })
+              /*.then(res =>{
+                  this.tracks = res.tracks.items
+              })*/
+          //this.tracks = tracks
       }
+  },
+  computed:{
+      /*fullName () {
+          return `${this.name} ${this.lastname}`
+      },
+      edad () {
+          var birthday_arr = this.fechaNacimiento.split("/");
+          var fecha = new Date(birthday_arr[2],birthday_arr[1]-1,birthday_arr[0])
+          var diff = Date.now() - fecha.getTime()
+          var edad =  new Date(diff)
+          return Math.abs(edad.getUTCFullYear() - 1970)
+      }*/
+
+      searchMessage(){
+          return `encontrados: ${this.tracks.length}`
+      }
+  },
+  watch:{
+      /*name ( newVal, oldVal) {
+          console.log(newVal, oldVal)
+      }*/
   }
 }
 </script>
@@ -76,5 +160,10 @@ export default {
 
 <style lang="scss">
   @import './scss/main.scss';
+
+  .results{
+    margin: 50px
+  }
+
 </style>
 
