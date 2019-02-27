@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './App.vue'
+import App from './Appold.vue'
 import childComponent from './components/childComponent.vue'
 
 Vue.component('child', childComponent)
