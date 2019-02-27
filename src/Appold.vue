@@ -46,7 +46,8 @@
     <p>{{formattedName}}</p>
 
     <login></login-->
-    <section class="section">
+    <p-m-loader v-show="isLoading"></p-m-loader>
+    <section class="section" v-show="!isLoading">
       <nav class="nav has-shadow">
         <div class="container">
           <div class="field has-addons">
@@ -69,9 +70,13 @@
 
       </child>
       <div class="container results">
-        <div class="columns">
-          <div class="column" v-for=" t in tracks">
-            {{t.name}}-{{t.artists[0].name}}
+        <div class="columns is-multiline">
+          <div class="column is-one-quarter" v-for=" t in tracks">
+            <p-m-track v-bind:track="t">
+
+            </p-m-track>
+            <!--{{--t.nam}}-{{t.artists[0].name--}}-->
+
           </div>
         </div>
       </div>
@@ -86,9 +91,11 @@
 </template>
 
 <script>
-    import trackService from './services/track.js'
-    import PMFooter from './components/layout/footer.vue'
-    import PMHeader from './components/layout/header.vue'
+    import trackService from '@/services/track.js'
+    import PMFooter from '@/components/layout/footer.vue'
+    import PMHeader from '@/components/layout/header.vue'
+    import PMTrack from '@/components/Track.vue'
+    import PMLoader from '@/components/shared/loader.vue'
   /*const tracks = [
       {name: 'Dance macabre', artist: 'Ghost'},
       {name: 'Dont go breacking my heart', artist:'Elton john'},
@@ -114,12 +121,15 @@ export default {
         formattedName: ''
       */
      searchQuery: '',
-     tracks: []
+     tracks: [],
+     isLoading: false
     }
   },
   components:{
     PMFooter: PMFooter,
-    PMHeader: PMHeader
+    PMHeader: PMHeader,
+    PMTrack: PMTrack,
+    PMLoader: PMLoader
   },
   methods:{
       /*format(){
@@ -128,10 +138,13 @@ export default {
       search () {
           if (this.searchQuery === ''){return}
           var that = this
+          this.isLoading = true
           console.log(this.tracks)
           trackService.search(this.searchQuery)
               .then(function(res){
+                  that.isLoading = false
                   return  that.tracks = res.tracks.items
+
               })
               /*.then(res =>{
                   this.tracks = res.tracks.items
@@ -168,9 +181,7 @@ export default {
 <style lang="scss">
   @import './scss/main.scss';
 
-  .results{
-    margin: 50px
-  }
+
 
 </style>
 
