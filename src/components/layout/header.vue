@@ -19,8 +19,21 @@
                 <div class="container has-text-centered">
                     <h1 class="title">Platzi Music</h1>
                     <h2 class="subtitle"> canciones que estan Vue-nisimas</h2>
+                    <p-m-player></p-m-player>
                 </div>
             </div>
         </div>
     </section>
 </template>
+
+<script>
+
+    import PMPlayer from '@/components/Player.vue'
+
+    export default {
+        components:{
+            PMPlayer: PMPlayer
+        }
+
+    }
+</script>

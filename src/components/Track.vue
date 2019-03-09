@@ -26,7 +26,7 @@
                 <nav class="level">
                     <div class="level-left">
                         <a class="level-item">
-                            <span class="icon is-small"> ▶️ </span>
+                            <span class="icon is-small" @click="selectTrack"> ▶️ </span>
                         </a>
                     </div>
                 </nav>
@@ -42,9 +42,18 @@
             track:{
                 type: Object, required: true
             }
+        },
+        methods:{
+            selectTrack () {
+                this.$emit('select', this.track.id)
+
+                this.$bus.$emit('set-track', this.track)
+            }
         }
 
     }
 </script>
 
-<style></style>
+<style>
+
+</style>

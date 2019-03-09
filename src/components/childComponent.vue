@@ -1,6 +1,12 @@
 <template>
     <div>
-        <h1>Este es un componente hijo</h1>
+        <slot name="title">
+            <h1>Este es un componente hijo</h1>
+        </slot>
+        <slot name="body">
+
+        </slot>
+
         <local-component></local-component>
     </div>
 </template>
