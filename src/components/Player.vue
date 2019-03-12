@@ -1,11 +1,11 @@
 <template>
     <div class="content">
         <p class="is-128x128">
-            <img v-bind:src="track.album.images[0].url">
+            <img v-if="track && track.album" v-bind:src="track.album.images[0].url">
         </p>
         <p>
             <strong>{{track.name}}</strong>
-            <small>[{{track.duration_ms}}]</small>
+            <small>[{{track.duration_ms | ms-to-mm }}]</small>
         </p>
         <p>
             <audio controls v-bind:src="track.preview_url">

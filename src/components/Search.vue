@@ -14,7 +14,8 @@
                 <div class="container">
                     <div class="field has-addons">
                         <div class="control is-expanded">
-                            <input class="input is-large" type="text" placeholder="Buscar canciones" v-model="searchQuery"/>
+                            <input class="input is-large" type="text" placeholder="Buscar canciones" v-model="searchQuery"
+                            v-on:keyup.enter="search"/>
                         </div>
                         <div class="control">
                             <a class="button is-info is-large" @click="search">Buscar</a>

@@ -10,7 +10,8 @@
                             </nav>
                         </div>
                         <div class="nav-right navbar-menu">
-
+                            <router-link :to="{name: 'search'}" class="navbar-item">Buscar</router-link>
+                            <router-link to="about" class="navbar-item">Nosotros</router-link>
                         </div>
                     </div>
                 </header>
