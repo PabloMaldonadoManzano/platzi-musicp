@@ -1,14 +1,16 @@
 <template>
     <main>
+        <transition name="move">
+            <p-m-notification v-show="showNotification">
+                <p slot="body">
+                    no se encontraron resultados
+                </p>
+            </p-m-notification>
+        </transition>
+        <transition name="move">
+            <p-m-loader v-show="isLoading"></p-m-loader>
+        </transition>
 
-
-        <p-m-notification v-show="showNotification">
-            <p slot="body">
-                no se encontraron resultados
-            </p>
-        </p-m-notification>
-
-        <p-m-loader v-show="isLoading"></p-m-loader>
         <section class="section" v-show="!isLoading">
             <nav class="nav has-shadow">
                 <div class="container">
@@ -45,7 +47,9 @@
             <div class="container results">
                 <div class="columns is-multiline">
                     <div class="column is-one-quarter" v-for=" t in tracks">
-                        <p-m-track v-bind:class="{'is-active': t.id === selectedTrack}" v-bind:track="t" v-on:select="setSelectedTrack">
+                        <p-m-track v-blur="t.preview_url"
+                                v-bind:class="{'is-active': t.id === selectedTrack}"
+                                v-bind:track="t" v-on:select="setSelectedTrack">
 
                         </p-m-track>
                         <!--{{--t.nam}}-{{t.artists[0].name--}}-->

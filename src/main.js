@@ -10,11 +10,17 @@ import msToMm from '@/components/filters/ms-to-mm'
 
 import EventBus from '@/plugins/event-bus'
 
+import blur from '@/directives/blur'
+
+import store from '@/store'
+
 Vue.component('child', childComponent)
 
 Vue.use(EventBus)
 Vue.use(VueRouter)
 Vue.use(msToMm)
+Vue.use(blur)
+
 
 const router = new VueRouter(
     {
@@ -25,5 +31,6 @@ const router = new VueRouter(
 new Vue({
   el: '#app',
   render: h => h(App),
-  router
+  router,
+  store
 })

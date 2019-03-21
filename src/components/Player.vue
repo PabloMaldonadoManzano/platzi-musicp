@@ -16,8 +16,10 @@
 </template>
 
 <script>
+    import {mapState} from 'vuex'
     export default {
-        data () {
+        //se van los eventbus y mixes usados por que ahora se van a usar Vuex
+        /*data () {
             return {
                 track: {}
             }
@@ -26,6 +28,9 @@
             this.$bus.$on('set-track',(track) => {
                 this.track = track
             })
+        }*/
+        computed:{
+            ...mapState(['track'])
         }
     }
 </script>
